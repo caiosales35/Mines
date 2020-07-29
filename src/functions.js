@@ -1,5 +1,3 @@
-import Field from "./components/Field";
-
 const createBoard = (rows, columns) => {
   return Array(rows)
     .fill(0)
@@ -70,7 +68,7 @@ const safeNeighborhood = (board, row, column) => {
 
 const openField = (board, row, column) => {
   const field = board[row][column];
-  if (!field.mined) {
+  if (!field.opened) {
     field.opened = true;
     if (field.mined) {
       field.exploded = true;
