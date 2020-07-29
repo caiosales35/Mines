@@ -9,6 +9,7 @@ import {
   hadExplosion,
   wonGame,
   showMines,
+  invertFlag,
 } from "./src/functions";
 
 export default function App() {
@@ -38,6 +39,15 @@ export default function App() {
     setLost(ifLost);
   };
 
+  onFlag = (row, column) => {
+    const newBoard = cloneBoard(board);
+    invertFlag(newBoard, row, column);
+    const ifWon = wonGame(newBoard);
+    if (ifWon) alert("Voce venceu!");
+    setBoard(newBoard);
+    setWon(ifWon);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text>Iniciando o Mines!</Text>
@@ -45,7 +55,7 @@ export default function App() {
         Tamanho da grade: {params.getRowsAmount()} x {params.getColumnsAmount()}
       </Text>
       <View style={styles.board}>
-        <MineField board={board} onOpenField={onField} />
+        <MineField board={board} onOpenField={onField} onSelectField={onFlag} />
       </View>
     </SafeAreaView>
   );
